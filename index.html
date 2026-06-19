@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دعوة مناقشة مشروع التخرج | ميرال فرج</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --white:#ffffff;
+      --gold:#c8a86b;
+      --gold-deep:#9c7d3f;
+      --ink:#171513;
+      --ash:#f4f1ea;
+      --line:rgba(200,168,107,0.35);
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+      font-family:'Tajawal',sans-serif;
+      background:var(--white);
+      color:var(--ink);
+      overflow-x:hidden;
+    }
+    .display{font-family:'Markazi Text',serif;}
+
+    /* ---------- seal / signature element ---------- */
+    .seal{
+      width:84px;height:84px;
+      border:1.5px solid var(--gold);
+      border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      position:relative;
+    }
+    .seal::before{
+      content:'';
+      position:absolute;
+      inset:8px;
+      border:1px solid var(--gold);
+      border-radius:50%;
+    }
+    .seal svg{width:32px;height:32px;}
+
+    /* ---------- reveal on scroll ---------- */
+    .reveal{
+      opacity:0;
+      transform:translateY(28px);
+      transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+    }
+    .reveal.in{opacity:1;transform:translateY(0);}
+
+    /* ---------- nav dot rail ---------- */
+    .railwrap{
+      position:fixed; top:0; left:0; width:100%; z-index:50;
+      padding:22px 5vw;
+      display:flex; justify-content:space-between; align-items:center;
+      pointer-events:none;
+    }
+    .brandmark{
+      font-family:'Markazi Text',serif;
+      font-size:22px;
+      letter-spacing:1px;
+      color:var(--ink);
+      pointer-events:auto;
+      background:rgba(255,255,255,0.7);
+      backdrop-filter:blur(6px);
+      padding:6px 16px;
+      border-radius:30px;
+      border:1px solid var(--line);
+    }
+
+    /* ================= HERO ================= */
+    .hero{
+      position:relative;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+              radial-gradient(ellipse at 75% 20%, rgba(200,168,107,0.16), transparent 55%),
+              radial-gradient(ellipse at 15% 85%, rgba(200,168,107,0.10), transparent 50%),
+              var(--ash);
+      padding:140px 6vw 80px;
+    }
+    .hero-grid{
+      max-width:1180px;
+      width:100%;
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:60px;
+      align-items:center;
+    }
+    .hero-text{order:2;}
+    .eyebrow-line{
+      display:flex; align-items:center; gap:14px;
+      margin-bottom:28px;
+    }
+    .eyebrow-line .stroke{height:1px;width:48px;background:var(--gold);}
+    .eyebrow-line span{
+      font-size:14px; letter-spacing:3px; color:var(--gold-deep); font-weight:700;
+    }
+    .hero h1{
+      font-family:'Markazi Text',serif;
+      font-weight:700;
+      font-size:clamp(40px,5.4vw,68px);
+      line-height:1.18;
+      color:var(--ink);
+      margin-bottom:22px;
+    }
+    .hero h1 em{
+      font-style:normal;
+      color:var(--gold-deep);
+      background:linear-gradient(180deg,transparent 62%, rgba(200,168,107,0.28) 62%);
+    }
+    .hero .lead{
+      font-size:17px;
+      line-height:2;
+      color:#48433c;
+      max-width:520px;
+      margin-bottom:36px;
+      font-weight:300;
+    }
+    .name-block{
+      margin-bottom:34px;
+    }
+    .name-block .who{
+      font-family:'Markazi Text',serif;
+      font-size:32px;
+      font-weight:700;
+      color:var(--ink);
+    }
+    .name-block .role{
+      font-size:15px;
+      color:var(--gold-deep);
+      font-weight:700;
+      letter-spacing:.5px;
+      margin-top:4px;
+    }
+    .name-block .uni{
+      font-size:14px;
+      color:#7a7468;
+      margin-top:2px;
+      font-weight:400;
+    }
+    .meta-row{
+      display:flex; gap:34px; margin-bottom:38px; flex-wrap:wrap;
+    }
+    .meta-item .lbl{font-size:12px; color:#9c9483; letter-spacing:2px; margin-bottom:6px;}
+    .meta-item .val{font-family:'Markazi Text',serif; font-size:24px; font-weight:600; color:var(--ink);}
+    .cta-btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:16px 34px;
+      background:var(--ink);
+      color:var(--white);
+      border:1px solid var(--ink);
+      border-radius:2px;
+      font-size:15px; font-weight:500;
+      letter-spacing:1px;
+      cursor:pointer;
+      text-decoration:none;
+      transition:all .35s ease;
+    }
+    .cta-btn:hover{
+      background:transparent;
+      color:var(--ink);
+    }
+    .cta-btn svg{transition:transform .35s ease;}
+    .cta-btn:hover svg{transform:translateX(-5px);}
+
+    .hero-portrait{
+      order:1;
+      position:relative;
+      display:flex;
+      justify-content:center;
+    }
+    .portrait-frame{
+      position:relative;
+      width:100%;
+      max-width:380px;
+    }
+    .portrait-frame::before{
+      content:'';
+      position:absolute;
+      inset:-18px;
+      border:1px solid var(--gold);
+      z-index:0;
+    }
+    .portrait-frame img{
+      position:relative;
+      width:100%;
+      display:block;
+      filter:grayscale(8%) contrast(1.03);
+      z-index:1;
+    }
+    .portrait-tag{
+      position:absolute;
+      bottom:-26px;
+      right:-26px;
+      background:var(--white);
+      border:1px solid var(--line);
+      padding:14px 20px;
+      z-index:2;
+      box-shadow:0 18px 40px -18px rgba(23,21,19,0.25);
+    }
+    .portrait-tag .seal{width:50px;height:50px;display:none;}
+    .portrait-tag .tag-text .t1{font-family:'Markazi Text',serif; font-weight:700; font-size:18px;}
+    .portrait-tag .tag-text .t2{font-size:11px; color:#9c9483; letter-spacing:1.5px; margin-top:2px;}
+
+    /* ================= ABOUT ================= */
+    .section{padding:120px 6vw;}
+    .section-inner{max-width:1100px; margin:0 auto;}
+    .about{background:var(--white);}
+    .about-grid{
+      display:grid;
+      grid-template-columns:.7fr 1.3fr;
+      gap:70px;
+      align-items:start;
+    }
+    .section-head{margin-bottom:18px;}
+    .section-head .num{
+      font-family:'Markazi Text',serif;
+      font-size:15px;
+      color:var(--gold-deep);
+      letter-spacing:2px;
+      font-weight:700;
+      display:block;
+      margin-bottom:14px;
+    }
+    .section-head h2{
+      font-family:'Markazi Text',serif;
+      font-size:clamp(30px,3.4vw,42px);
+      font-weight:700;
+      line-height:1.25;
+    }
+    .about-grid p{
+      font-size:17px;
+      line-height:2.1;
+      color:#48433c;
+      font-weight:300;
+      margin-bottom:18px;
+    }
+    .quote-strip{
+      border-right:2px solid var(--gold);
+      padding-right:22px;
+      margin-top:30px;
+    }
+    .quote-strip p{
+      font-family:'Markazi Text',serif;
+      font-size:22px;
+      font-style:normal;
+      color:var(--ink);
+      line-height:1.7;
+      font-weight:600;
+    }
+
+    /* ================= PROJECT ================= */
+    .project{
+      background:var(--ink);
+      color:var(--white);
+      position:relative;
+    }
+    .project::before{
+      content:'';
+      position:absolute; inset:0;
+      background:
+              radial-gradient(ellipse at 85% 10%, rgba(200,168,107,0.14), transparent 50%);
+      pointer-events:none;
+    }
+    .project .section-head .num{color:var(--gold);}
+    .project .section-head h2{color:var(--white);}
+    .project-title-card{
+      border:1px solid rgba(200,168,107,0.4);
+      padding:34px 36px;
+      margin:36px 0 44px;
+      background:rgba(255,255,255,0.02);
+    }
+    .project-title-card .en{
+      font-family:'Markazi Text',serif;
+      font-size:19px;
+      line-height:1.7;
+      color:rgba(255,255,255,0.55);
+      direction:ltr;
+      text-align:left;
+      margin-bottom:18px;
+      padding-bottom:18px;
+      border-bottom:1px solid rgba(255,255,255,0.1);
+      font-weight:600;
+    }
+    .project-title-card .ar{
+      font-size:18px;
+      line-height:1.95;
+      color:rgba(255,255,255,0.9);
+      font-weight:400;
+    }
+    .project-desc{
+      font-size:17px;
+      line-height:2.1;
+      color:rgba(255,255,255,0.75);
+      font-weight:300;
+      max-width:760px;
+      margin-bottom:50px;
+    }
+    .goals-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:1px;
+      background:rgba(255,255,255,0.1);
+      border:1px solid rgba(255,255,255,0.1);
+    }
+    .goal-cell{
+      background:var(--ink);
+      padding:30px 26px;
+      transition:background .4s ease;
+    }
+    .goal-cell:hover{background:#1f1c18;}
+    .goal-cell .gicon{
+      width:38px;height:38px;
+      border:1px solid var(--gold);
+      border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      margin-bottom:18px;
+    }
+    .goal-cell .gicon svg{width:16px;height:16px;}
+    .goal-cell p{
+      font-size:15.5px;
+      line-height:1.9;
+      color:rgba(255,255,255,0.85);
+      font-weight:400;
+    }
+
+    /* ================= DETAILS ================= */
+    .details{background:var(--ash);}
+    .details-card{
+      background:var(--white);
+      border:1px solid var(--line);
+      box-shadow:0 30px 70px -40px rgba(23,21,19,0.25);
+      padding:0;
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+    }
+    .detail-cell{
+      padding:38px 36px;
+      border-bottom:1px solid var(--line);
+    }
+    .detail-cell:nth-child(odd){border-left:1px solid var(--line);}
+    .detail-cell .dicon{margin-bottom:16px;}
+    .detail-cell .dicon svg{width:26px;height:26px;stroke:var(--gold-deep);}
+    .detail-cell .dl{font-size:12px; letter-spacing:2px; color:#9c9483; margin-bottom:8px;}
+    .detail-cell .dv{font-family:'Markazi Text',serif; font-size:24px; font-weight:600; color:var(--ink);}
+    .detail-cell .dv.muted{color:#b3ab9b; font-style:italic; font-weight:400; font-size:18px;}
+
+    /* ---------- add to calendar ---------- */
+    .calendar-box{
+      margin-top:34px;
+      background:var(--white);
+      border:1px solid var(--line);
+      padding:30px 36px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+      flex-wrap:wrap;
+    }
+    .calendar-box-text .dl{margin-bottom:6px;}
+    .calendar-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    .cal-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      padding:13px 22px;
+      background:transparent;
+      color:var(--ink);
+      border:1px solid var(--gold);
+      font-family:'Tajawal',sans-serif;
+      font-size:14px;
+      font-weight:500;
+      letter-spacing:.3px;
+      cursor:pointer;
+      transition:all .3s ease;
+    }
+    .cal-btn svg{width:17px;height:17px;stroke:var(--gold-deep);transition:stroke .3s ease;}
+    .cal-btn:hover{
+      background:var(--ink);
+      border-color:var(--ink);
+      color:var(--white);
+    }
+    .cal-btn:hover svg{stroke:var(--white);}
+    @media (max-width:640px){
+      .calendar-box{flex-direction:column; align-items:flex-start; text-align:right;}
+      .calendar-actions{width:100%;}
+      .cal-btn{flex:1; justify-content:center;}
+    }
+
+    /* ================= CLOSING ================= */
+    .closing{
+      background:var(--white);
+      text-align:center;
+      padding:140px 6vw 130px;
+      position:relative;
+    }
+    .closing-seal{
+      margin:0 auto 40px;
+    }
+    .closing h2{
+      font-family:'Markazi Text',serif;
+      font-size:clamp(28px,3.6vw,40px);
+      font-weight:600;
+      line-height:1.7;
+      max-width:780px;
+      margin:0 auto 14px;
+      color:var(--ink);
+    }
+    .closing .sign{
+      margin-top:46px;
+      font-family:'Markazi Text',serif;
+      font-size:26px;
+      color:var(--gold-deep);
+      font-weight:700;
+    }
+    .closing .sign .role-sm{
+      display:block;
+      font-family:'Tajawal',sans-serif;
+      font-size:13px;
+      color:#9c9483;
+      letter-spacing:1.5px;
+      margin-top:6px;
+      font-weight:500;
+    }
+
+    footer{
+      background:var(--ink);
+      color:rgba(255,255,255,0.4);
+      text-align:center;
+      padding:26px;
+      font-size:12px;
+      letter-spacing:1px;
+    }
+
+    /* ---------- responsive ---------- */
+    @media (max-width:900px){
+      .hero-grid{grid-template-columns:1fr; gap:50px;}
+      .hero-text{order:1; text-align:center;}
+      .hero-portrait{order:2;}
+      .eyebrow-line{justify-content:center;}
+      .hero .lead{margin-left:auto;margin-right:auto;}
+      .meta-row{justify-content:center;}
+      .about-grid{grid-template-columns:1fr; gap:36px;}
+      .quote-strip{border-right:none; border-right:2px solid var(--gold); padding-right:18px;}
+      .details-card{grid-template-columns:1fr;}
+      .detail-cell:nth-child(odd){border-left:none;}
+      .portrait-tag{right:50%; transform:translateX(50%); bottom:-22px;}
+    }
+    @media (max-width:520px){
+      .section{padding:80px 6vw;}
+      .hero{padding-top:120px;}
+      .goals-grid{grid-template-columns:1fr;}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .reveal{opacity:1!important; transform:none!important; transition:none!important;}
+      html{scroll-behavior:auto;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="railwrap">
+  <div class="brandmark">DR. Miral</div>
+</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="hero-grid">
+    <div class="hero-text reveal">
+      <div class="eyebrow-line"><span>دعوة لمناقشة مشروع التخرج</span><div class="stroke"></div></div>
+      <h1>لحظة تتويج <br><em>ست سنوات</em><br>من العلم والعطاء</h1>
+      <p class="lead">يسرني دعوتكم لحضور مناقشة مشروع تخرجي ومشاركتي هذه اللحظة المميزة التي تمثل ثمرة ست سنوات من الدراسة والاجتهاد والعطاء.</p>
+
+      <div class="name-block">
+        <div class="who">ميرال فرج</div>
+        <div class="role">دكتور صيدلة (PharmD)</div>
+        <div class="uni">جامعة النجاح الوطنية</div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-item">
+          <div class="lbl">التاريخ</div>
+          <div class="val">25 يونيو 2026</div>
+        </div>
+        <div class="meta-item">
+          <div class="lbl">الوقت</div>
+          <div class="val">11:00 صباحاً</div>
+        </div>
+      </div>
+
+      <a href="#project" class="cta-btn">
+        تفاصيل المشروع
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </a>
+    </div>
+
+    <div class="hero-portrait reveal">
+      <div class="portrait-frame">
+        <img src="meral.jpeg" alt="ميرال فرج">
+        <div class="portrait-tag">
+          <div class="tag-text">
+            <div class="t1">Dr. Miral Faraj</div>
+            <div class="t2">PHARM.D CANDIDATE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="section about" id="about">
+  <div class="section-inner about-grid">
+    <div class="reveal">
+      <div class="section-head">
+        <span class="num">نبذة شخصية</span>
+        <h2>ميرال فرج</h2>
+      </div>
+    </div>
+    <div class="reveal">
+      <p>طالبة دكتور صيدلة في جامعة النجاح الوطنية، أنهت بنجاح ست سنوات من الدراسة الأكاديمية والتدريب العملي، وتسعى للمساهمة في تطوير القطاع الصحي من خلال البحث العلمي والتكنولوجيا الحديثة.</p>
+      <div class="quote-strip">
+        <p>"العلم رحلة لا تنتهي بالتخرج، بل تبدأ منه."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECT ================= -->
+<section class="section project" id="project">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-head">
+        <span class="num">مشروع التخرج</span>
+        <h2>الذكاء الاصطناعي في خدمة<br>المعلومات الطبية</h2>
+      </div>
+    </div>
+
+    <div class="project-title-card reveal">
+      <div class="en">Developing an Artificial Intelligence Tool for Robust Automatic Extraction and Processing of Medical Information from Raw Medical Reports Deposited at An-Najah National University Hospital</div>
+      <div class="ar">تطوير أداة تعتمد على الذكاء الاصطناعي للاستخراج والمعالجة الآلية للمعلومات الطبية من التقارير الطبية الخام المودعة في مستشفى جامعة النجاح الوطنية.</div>
+    </div>
+
+    <p class="project-desc reveal">يتمحور المشروع حول تطوير أداة ذكاء اصطناعي متقدمة لمعالجة التقارير الطبية، حيث يقوم النظام بقراءة التقارير الطبية الطويلة آلياً، واستخراج المعلومات المهمة منها كالتشخيصات ونتائج الفحوصات المخبرية والعلاجات الموصوفة، ثم تنظيم هذه البيانات ضمن قاعدة بيانات منظمة تساعد في تحسين جودة الرعاية الصحية ودعم البحث العلمي.</p>
+
+    <div class="goals-grid reveal">
+      <div class="goal-cell">
+        <div class="gicon"><svg viewBox="0 0 24 24" fill="none" stroke="#c8a86b" stroke-width="1.6"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
+        <p>أتمتة استخراج البيانات الطبية</p>
+      </div>
+      <div class="goal-cell">
+        <div class="gicon"><svg viewBox="0 0 24 24" fill="none" stroke="#c8a86b" stroke-width="1.6"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <p>تحسين كفاءة التعامل مع التقارير الطبية</p>
+      </div>
+      <div class="goal-cell">
+        <div class="gicon"><svg viewBox="0 0 24 24" fill="none" stroke="#c8a86b" stroke-width="1.6"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <p>دعم اتخاذ القرار الطبي</p>
+      </div>
+      <div class="goal-cell">
+        <div class="gicon"><svg viewBox="0 0 24 24" fill="none" stroke="#c8a86b" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <p>تسهيل الوصول إلى المعلومات الصحية</p>
+      </div>
+      <div class="goal-cell">
+        <div class="gicon"><svg viewBox="0 0 24 24" fill="none" stroke="#c8a86b" stroke-width="1.6"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <p>تعزيز استخدام الذكاء الاصطناعي في المجال الطبي</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DETAILS ================= -->
+<section class="section details" id="details">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <span class="num">تفاصيل المناقشة</span>
+      <h2>كل ما تحتاجون معرفته</h2>
+    </div>
+    <div class="details-card reveal" style="margin-top:40px;">
+      <div class="detail-cell">
+        <div class="dicon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="4" width="18" height="18" rx="1"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+        <div class="dl">التاريخ</div>
+        <div class="dv">25 يونيو 2026</div>
+      </div>
+      <div class="detail-cell">
+        <div class="dicon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <div class="dl">الوقت</div>
+        <div class="dv">11:00 صباحاً</div>
+      </div>
+      <div class="detail-cell">
+        <div class="dicon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="dl">المكان</div>
+        <div class="dv">مدرج كلية الطب (B3)</div>
+      </div>
+      <div class="detail-cell">
+        <div class="dicon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div class="dl">المشرف</div>
+        <div class="dv">د. نعيم كتانة </div>
+      </div>
+    </div>
+
+    <div class="calendar-box reveal">
+      <div class="calendar-box-text">
+        <div class="dl">لا تفوتوا الموعد</div>
+        <div class="dv">أضيفوا المناقشة إلى تقويمكم</div>
+      </div>
+      <div class="calendar-actions">
+        <button class="cal-btn" id="gcalBtn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="4" width="18" height="18" rx="1"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          Google Calendar
+        </button>
+        <button class="cal-btn" id="icsBtn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v3a1 1 0 001 1h14a1 1 0 001-1v-3"/></svg>
+          Apple / Outlook (.ics)
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CLOSING ================= -->
+<section class="closing reveal">
+  <div class="closing-seal seal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#c8a86b" stroke-width="1.4"><path d="M12 2L4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+  </div>
+  <h2>يشرفني حضوركم ومشاركتكم هذه المناسبة العلمية المميزة،<br>فوجودكم مصدر فخر واعتزاز ودعم كبير لهذه المرحلة المهمة من مسيرتي الأكاديمية.</h2>
+  <div class="sign">ميرال فرج<span class="role-sm">PHARM.D — AN-NAJAH NATIONAL UNIVERSITY</span></div>
+</section>
+
+<footer>An-Najah National University &mdash; Faculty of Pharmacy &mdash; 2026</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{threshold:0.15});
+  els.forEach(el=>io.observe(el));
+
+  /* ---------- add to calendar ---------- */
+  const EVENT = {
+    title: 'مناقشة مشروع تخرج ميرال فرج',
+    description: 'دعوة لحضور مناقشة مشروع تخرج ميرال فرج - دكتور صيدلة - جامعة النجاح الوطنية.',
+    location: 'جامعة النجاح الوطنية',
+    // 2026-06-25, 11:00 -> 13:00 local time
+    start: '20260625T110000',
+    end:   '20260625T130000'
+  };
+
+  document.getElementById('gcalBtn').addEventListener('click', ()=>{
+    const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(EVENT.title)}&dates=${EVENT.start}/${EVENT.end}&details=${encodeURIComponent(EVENT.description)}&location=${encodeURIComponent(EVENT.location)}`;
+    window.open(url, '_blank');
+  });
+
+  document.getElementById('icsBtn').addEventListener('click', ()=>{
+    const ics = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Meral Farraj//Graduation Defense//AR',
+      'BEGIN:VEVENT',
+      `UID:${Date.now()}@meralfarraj`,
+      `DTSTAMP:${EVENT.start}Z`,
+      `DTSTART:${EVENT.start}`,
+      `DTEND:${EVENT.end}`,
+      `SUMMARY:${EVENT.title}`,
+      `DESCRIPTION:${EVENT.description}`,
+      `LOCATION:${EVENT.location}`,
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+    const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'meral-defense.ics';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+</script>
+
+</body>
+</html>
